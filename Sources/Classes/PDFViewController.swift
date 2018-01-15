@@ -51,7 +51,7 @@ extension PDFViewController {
 }
 
 /// Controller that is able to interact and navigate through pages of a `PDFDocument`
-public final class PDFViewController: UIViewController {
+open class PDFViewController: UIViewController {
     /// Action button style
     public enum ActionStyle {
         /// Brings up a print modal allowing user to print current PDF
@@ -127,7 +127,7 @@ public final class PDFViewController: UIViewController {
         }
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
     
         collectionView.backgroundColor = backgroundColor
@@ -146,24 +146,24 @@ public final class PDFViewController: UIViewController {
         thumbnailCollectionControllerWidth.constant = width
     }
     
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         didSelectIndexPath(IndexPath(row: currentPageIndex, section: 0))
     }
     
-    override public var prefersStatusBarHidden: Bool {
+    override open var prefersStatusBarHidden: Bool {
         return navigationController?.isNavigationBarHidden == true
     }
     
-    override public var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    override open var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
     
-    public override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    open override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return isThumbnailsEnabled
     }
     
-    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? PDFThumbnailCollectionViewController {
             thumbnailCollectionController = controller
             controller.document = document
@@ -172,7 +172,7 @@ public final class PDFViewController: UIViewController {
         }
     }
     
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { context in
             let currentIndexPath = IndexPath(row: self.currentPageIndex, section: 0)
             self.collectionView.reloadItems(at: [currentIndexPath])
