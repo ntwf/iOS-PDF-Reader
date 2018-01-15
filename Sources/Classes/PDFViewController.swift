@@ -85,7 +85,7 @@ public final class PDFViewController: UIViewController {
     private var actionButtonImage: UIImage?
     
     /// Current page being displayed
-    private var currentPageIndex: Int = 0
+    public var currentPageIndex: Int = 0
     
     /// Bottom thumbnail controller
     private var thumbnailCollectionController: PDFThumbnailCollectionViewController?
