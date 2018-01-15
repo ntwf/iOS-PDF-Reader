@@ -23,30 +23,45 @@ extension PDFViewController {
     public class func createNew(with document: PDFDocument, title: String? = nil, actionButtonImage: UIImage? = nil, actionStyle: ActionStyle = .print, backButton: UIBarButtonItem? = nil, isThumbnailsEnabled: Bool = true, startPageIndex: Int = 0) -> PDFViewController {
         let storyboard = UIStoryboard(name: "PDFReader", bundle: Bundle(for: PDFViewController.self))
         let controller = storyboard.instantiateInitialViewController() as! PDFViewController
-        controller.document = document
-        controller.actionStyle = actionStyle
+        
+        return controller
+    }
+    
+    private func configuredController(with document: PDFDocument,
+                                      title: String? = nil,
+                                      actionButtonImage: UIImage? = nil,
+                                      actionStyle: ActionStyle = .print,
+                                      backButton: UIBarButtonItem? = nil,
+                                      isThumbnailsEnabled: Bool = true,
+                                      startPageIndex: Int = 0) {
+        self.document = document
+        self.actionStyle = actionStyle
         
         if let title = title {
-            controller.title = title
+            self.title = title
         } else {
-            controller.title = document.fileName
+            self.title = document.fileName
         }
         
         if startPageIndex >= 0 && startPageIndex < document.pageCount {
-            controller.currentPageIndex = startPageIndex
+            self.currentPageIndex = startPageIndex
         } else {
-            controller.currentPageIndex = 0
+            self.currentPageIndex = 0
         }
         
-        controller.backButton = backButton
+        self.backButton = backButton
         
         if let actionButtonImage = actionButtonImage {
-            controller.actionButton = UIBarButtonItem(image: actionButtonImage, style: .plain, target: controller, action: #selector(actionButtonPressed))
+            self.actionButton = UIBarButtonItem(image: actionButtonImage,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(actionButtonPressed))
         } else {
-            controller.actionButton = UIBarButtonItem(barButtonSystemItem: .action, target: controller, action: #selector(actionButtonPressed))
+            self.actionButton = UIBarButtonItem(barButtonSystemItem: .action,
+                                                target: self,
+                                                action: #selector(actionButtonPressed))
         }
-        controller.isThumbnailsEnabled = isThumbnailsEnabled
-        return controller
+        self.isThumbnailsEnabled = isThumbnailsEnabled
     }
 }
 
