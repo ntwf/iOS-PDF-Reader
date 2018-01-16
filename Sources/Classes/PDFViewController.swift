@@ -283,8 +283,16 @@ extension PDFViewController: PDFPageCollectionViewCellDelegate {
 }
 
 extension PDFViewController: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 1, height: collectionView.frame.height)
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var height = CGFloat(1)
+        if let thumbnailHeight = thumbnailCollectionController?.collectionView?.frame.height {
+            height = thumbnailHeight
+        }
+        
+        return CGSize(width: collectionView.frame.width - 1, height: collectionView.frame.height - height)
     }
 }
 
