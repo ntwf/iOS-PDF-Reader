@@ -27,14 +27,12 @@ extension PDFViewController {
         return controller
     }
     
-    private func configuredController(with document: PDFDocument,
-                                      title: String? = nil,
-                                      actionButtonImage: UIImage? = nil,
-                                      actionStyle: ActionStyle = .print,
-                                      backButton: UIBarButtonItem? = nil,
-                                      isThumbnailsEnabled: Bool = true,
-                                      startPageIndex: Int = 0) {
-        self.document = document
+    public func configuredController(title: String? = nil,
+                                     actionButtonImage: UIImage? = nil,
+                                     actionStyle: ActionStyle = .print,
+                                     backButton: UIBarButtonItem? = nil,
+                                     isThumbnailsEnabled: Bool = true,
+                                     startPageIndex: Int = 0) {
         self.actionStyle = actionStyle
         
         if let title = title {
@@ -92,7 +90,7 @@ open class PDFViewController: UIViewController {
     @IBOutlet private var thumbnailCollectionControllerWidth: NSLayoutConstraint!
     
     /// PDF document that should be displayed
-    private var document: PDFDocument!
+    public var document: PDFDocument!
     
     private var actionStyle = ActionStyle.print
     
