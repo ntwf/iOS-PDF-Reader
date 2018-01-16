@@ -197,6 +197,11 @@ open class PDFViewController: UIViewController {
         }
         
         super.viewWillTransition(to: size, with: coordinator)
+        
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        flowLayout.invalidateLayout()
     }
     
     /// Takes an appropriate action based on the current action style
